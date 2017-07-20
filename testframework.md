@@ -149,7 +149,7 @@ Almost like `describe().it('should')`, it is `describe().test('something')`. Sco
 
 ### Points to note
 
-* Can be easily code-converted from Mocha `describe().it('should')` style
+* Can be easily [code-modded](https://github.com/skovhus/jest-codemods) from Mocha `describe().it('should')` style
 * Excellent tooling
   * CLI with watching and incremental testing supported
   * On-the-fly Visual Studio Code [extension](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest)
