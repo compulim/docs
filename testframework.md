@@ -160,7 +160,7 @@ Almost like `describe().it('should')`, it is `describe().test('something')`. Sco
 
 #### Simple
 
-"Only if you don't like snapshot testing"
+"Only if you don't like snapshot testing."
 
 ```js
 test('apple should turns red and tastes good after 6 months', async () => {
