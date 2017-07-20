@@ -211,7 +211,7 @@ For browser UI testing, you can either:
 
 ### Snapshot testing
 
-[https://facebook.github.io/jest/docs/en/snapshot-testing.html](https://facebook.github.io/jest/docs/en/snapshot-testing.html)
+Further read at [https://facebook.github.io/jest/docs/en/snapshot-testing.html](https://facebook.github.io/jest/docs/en/snapshot-testing.html).
 
 "Life is short, forget about expectations."
 
