@@ -8,11 +8,11 @@ There are multiple JavaScript test packages. Test is a very broad terms and we a
 
 | | Test framework | Test runner | Assertion library |
 | - | - | - | - |
-| Mocha | Yes | Yes | No |
-| Chai | No | No | Yes |
-| Jasmine | Yes | Yes | Yes |
-| Jest | Yes | Yes | Yes |
-| Karma | No | Yes | No |
+| Mocha | It is | It is | It is NOT |
+| Chai | It is NOT | It is NOT | It is |
+| Jasmine | It is | It is | It is |
+| Jest | It is | It is | It is |
+| Karma | It is NOT | It is | It is NOT |
 
 In additional, there are more tools to support a test:
 
@@ -23,21 +23,21 @@ In additional, there are more tools to support a test:
 
 All test frameworks listed support asynchronous tests, including asynchronous `beforeEach`/`afterEach` and `it`/`test`.
 
-There are multiple way to do asynchronous in JavaScript, we prefer ES6 `async`-`await` pattern. For unsupported environment, we can always Babel it.
+There are multiple way to do asynchronous in JavaScript, we prefer ES6 `async`-`await` pattern for clarity. For unsupported environment, we can always Babel it.
 
 ## Mocha
 
 [http://mochajs.org/](http://mochajs.org/)
 
-Traditional `describe('apple').it('should be red')` coding style.
+"The test framework everyone knows."
 
-Support Visual Studio Online build reports by using [JUnit reporter](https://www.npmjs.com/package/mocha-junit-reporter).
+### Pluses
 
-Visual Studio Test Explorer integration thru [Node.js Tools for Visual Studio](https://github.com/Microsoft/nodejstools#readme) and a `*.njsproj` file.
-
-Support asynchronous tests thru `done()` callback or `Promise` (`async`-`await`).
-
-CLI is limited, only run all tests or `grep`-ed tests, forcing you to run multiple tests everytime.
+* Traditional `describe('apple').it('should be red')` coding style.
+* Support Visual Studio Online build reports by using [JUnit reporter](https://www.npmjs.com/package/mocha-junit-reporter).
+* Visual Studio Test Explorer integration thru [Node.js Tools for Visual Studio](https://github.com/Microsoft/nodejstools#readme) and a `*.njsproj` file.
+* Support asynchronous tests thru `done()` callback or `Promise` (`async`-`await`).
+* CLI is limited, only run all tests or `grep`-ed tests, forcing you to run multiple tests everytime.
 
 ### Sample code
 
@@ -78,6 +78,8 @@ describe('apple after 6 months', () => {
 
 #### Ultimate
 
+The really right way to code a test, use bunches of `beforeEach`.
+
 ```js
 describe('apple', () => {
   let apple;
@@ -114,11 +116,14 @@ describe('apple', () => {
 
 [https://jasmine.github.io/](https://jasmine.github.io/)
 
-Traditional `describe('apple').it('should be red')` style code.
+"The everything test framework."
 
-Verify expectation by `expect(1).toBeTruthy()`. An extensible number of matchers like `toBeTruthy()`, `toBe(1)`, `toThrow()`, etc.
+### Pluses
 
-Angular2 has integrated Jasmine. Karma is used to run tests across multiple browsers.
+* Traditional `describe('apple').it('should be red')` style code
+* Verify expectation by `expect(1).toBeTruthy()`. An extensible number of matchers like `toBeTruthy()`, `toBe(1)`, `toThrow()`, etc
+* Angular2 has integrated Jasmine
+* Karma can be used to run tests across multiple browsers
 
 ### Sample code
 
@@ -140,9 +145,15 @@ expect(apple.color).toBe('red');
 
 [https://facebook.github.io/jest/](https://facebook.github.io/jest/)
 
+"Write less, test more."
+
 Almost like `describe().it('should')`, it is `describe().test('something')`. Scoping with `describe()` is optional.
 
-Tests React by pairing server-side rendering (into strings) and snapshot testing.
+### Pluses
+
+* Can be easily code-converted from Mocha `describe().it('should')` style
+* Tests React by pairing server-side rendering (into strings) and snapshot testing
+* Although Jest is based on Jasmine, it is moving away from Jasmine
 
 ### WTF? No browser testing?
 
@@ -175,6 +186,8 @@ If the snapshot is complicated to compare in strings, you can always write your 
 
 #### Simple
 
+"Only if you don't like snapshot testing"
+
 ```js
 test('apple should turns red and tastes good after 6 months', async () => {
   expect.assertions(1);
@@ -189,6 +202,8 @@ test('apple should turns red and tastes good after 6 months', async () => {
 ```
 
 #### Snapshot-oriented
+
+"TDD is not winning UI developers heart."
 
 ```js
 test('apple should be expected after 6 months', async () => {
