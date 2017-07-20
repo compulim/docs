@@ -156,33 +156,6 @@ Almost like `describe().it('should')`, it is `describe().test('something')`. Sco
 * Tests React by pairing server-side rendering (into strings) and snapshot testing
 * Although Jest is based on Jasmine, it planned to move away from it
 
-### WTF? No browser testing?
-
-Jest is designed to pair up with React. And React is designed to made up of pure JavaScript code (i.e. no DOM access). Thus, your test code should also be pure JavaScript.
-
-Although Jest doesn't run on browser directly, it doesn't need to. Running a pure JavaScript test on a browser is like testing a JavaScript VM instead of your code, it should works 98% of the time. We want to test how our app behave on a specific browser, including layout and interactions. Tests that run on browser should pair up with a browser automation library to test the actual behavior, and a screenshot test for layout.
-
-For browser UI testing, you can either:
-
-* Test React by outputting as server-side rendering, which is essentially a string
-* Control the browser to do some stuff, then dump the Redux store in JSON, or take a screenshot
-
-### Snapshot testing
-
-[https://facebook.github.io/jest/docs/en/snapshot-testing.html](https://facebook.github.io/jest/docs/en/snapshot-testing.html)
-
-"Life is short, forget about expectations."
-
-It is like visual regression test in a textual way. Without expectations, it is like saving 50% of time.
-
-First, you write the test and dump the output, Jest will record the dump as baseline. On the next test run, Jest will automatically verifies against the baseline. Baseline files are expected to commit into source control.
-
-If test failed and you think the test result is good, delete/update the baseline.
-
-Since you are also committing baseline files to source control, you will be able to easily verify your commit side-by-side.
-
-If the snapshot is complicated to compare in strings, you can always write your own pretty-printer.
-
 ### Sample code
 
 #### Simple
@@ -224,6 +197,33 @@ test('apple should be expected after 6 months', async () => {
 | - | - |
 | Node.js | Runs with plain JavaScript, or React/Native code |
 | Browser | Not supported, but you can BYOB, bring-your-own-browser |
+
+### WTF? No browser testing?
+
+Jest is designed to pair up with React. And React is designed to made up of pure JavaScript code (i.e. no DOM access). Thus, your test code should also be pure JavaScript.
+
+Although Jest doesn't run on browser directly, it doesn't need to. Running a pure JavaScript test on a browser is like testing a JavaScript VM instead of your code, it should works 98% of the time. We want to test how our app behave on a specific browser, including layout and interactions. Tests that run on browser should pair up with a browser automation library to test the actual behavior, and a screenshot test for layout.
+
+For browser UI testing, you can either:
+
+* Test React by outputting as server-side rendering, which is essentially a string
+* Control the browser to do some stuff, then dump the Redux store in JSON, or take a screenshot
+
+### Snapshot testing
+
+[https://facebook.github.io/jest/docs/en/snapshot-testing.html](https://facebook.github.io/jest/docs/en/snapshot-testing.html)
+
+"Life is short, forget about expectations."
+
+It is like visual regression test in a textual way. Without expectations, it is like saving 50% of time.
+
+First, you write the test and dump the output, Jest will record the dump as baseline. On the next test run, Jest will automatically verifies against the baseline. Baseline files are expected to commit into source control.
+
+If test failed and you think the test result is good, delete/update the baseline.
+
+Since you are also committing baseline files to source control, you will be able to easily verify your commit side-by-side.
+
+If the snapshot is complicated to compare in strings, you can always write your own pretty-printer.
 
 # Assertion library
 
