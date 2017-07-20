@@ -16,7 +16,7 @@ There are multiple JavaScript test packages. Test is a very broad terms and we a
 
 In additional, there are more tools to support a test:
 
-* Remote browser control
+* Browser automation
 * Code coverage
 * Reporting (usually included in CI/CD)
 
@@ -32,7 +32,7 @@ There are multiple ways to run JavaScript asynchronously, we prefer ES6 `async`/
 
 "The test framework everyone knows."
 
-### Pluses
+### Points to note
 
 * Traditional `describe('apple').it('should be red')` coding style
 * Support Visual Studio Online build reports by using [JUnit reporter](https://www.npmjs.com/package/mocha-junit-reporter)
@@ -119,7 +119,7 @@ describe('apple', () => {
 
 "The everything."
 
-### Pluses
+### Points to note
 
 * Traditional `describe('apple').it('should be red')` style code
 * Verify expectation by `expect(1).toBeTruthy()`. An extensible number of matchers like `toBeTruthy()`, `toBe(1)`, `toThrow()`, etc
@@ -150,7 +150,7 @@ expect(apple.color).toBe('red');
 
 Almost like `describe().it('should')`, it is `describe().test('something')`. Scoping with `describe()` is optional.
 
-### Pluses
+### Points to note
 
 * Can be easily code-converted from Mocha `describe().it('should')` style
 * Excellent tooling
@@ -259,36 +259,120 @@ In short, most test frameworks comes with test runner. An extra runner could hel
 Karma primarily help you to ship your test code to multiple managed browsers. It is in two parts:
 
 * Watcher + server: watch `*.js`, send test code to browser, and get results
-* Web page: receive test code, run it, and send results back
+* Web page: receive test code, host a URL in `<iframe>`, run your test code, send results back, teardown
 
-You can add WebDriver to control your browser, but it's on your own.
+Because tests are running in an `<iframe>`, interaction could be limited.
 
-# Remote browser control
+# Browser automation
 
-One thing important to choose a good remote controller is its ability to do async checks: check if an element has text "Hello, World!". We could wait until element is visible and then get the text. But this doesn't always works because element could be visible and split-second later, the text appears. React is an asynchronous rendering engine.
+Every engine/library/framework comes with different APIs, learning curve varies. Some run on top of WebDriver and some thru JavaScript injection.
+
+Don't overtest. Browsers are external systems and your tests are not designed to test the browser capability, but how your app behave in the system. One should expect browser tests to fail often in a deterministic way.
+
+## How to select a good one
+
+### Async checks
+
+One thing important to choose a good browser automator is its ability to do async checks: check if an element has text "Hello, World!". We could wait until element is visible and then get the text. But this doesn't always works because element could be visible and split-second later, the text appears.
+
+React is an asynchronous rendering engine. We could tap into the render loop but emitting artificial event after `componentDidMount`/`componentDidUpdate` event on root container.
 
 What we should do is repeating the test for a period of time until it has succeed. This is CPU-expensive but reduce time to run the test.
 
-Another thing is the ability to move the mouse, for example, test the hovering state of a tooltip component.
+Tests could be as cheap as grabbing an element, or very expensive like taking a screenshot.
+
+### Interactions
+
+A nice-to-have ability is moving the mouse, for example, test the hovering state of a tooltip component.
+
+### Taking screenshots
 
 The third thing is the ability to do screenshot, either for snapshot testing or recording failing cases for debugging purpose.
 
-## Selenium/W3C WebDriver protocol
+## How to control a browser
 
-Not object-oriented, comprehensive code. But it is the core protocol and everyone is layering on top of it.
+There are 3 ways to control a browser, in order of higher controllability:
 
-## PhantomJS
+1. WebDriver, feels like an accessibility library
+2. Browser scripting, run test code out-of-browser
+3. Injected JavaScript, run test code inside browser
 
-## CasperJS
+The following table list technologies and the way to control the browser:
 
-## NightmareJS
+| | WebDriver | Browser scripting | Injected JavaScript |
+| - | - | - | - |
+| W3C WebDriver | Yes | No | No |
+| PhantomJS | Yes | Yes | Yes (thru browser scripting) |
+| CasperJS | Yes | Yes | Yes (thru browser scripting) |
+| Karma | No | No | Yes |
+| NightmareJS | No | Yes | Yes (thru browser scripting) |
 
-## WebDriver.IO
+## Engine/library/framework
+
+### Selenium/W3C WebDriver protocol
+
+(Type: WebDriver)
+
+Very comprehensive RESTful API for browser automation. The core protocol and everyone is layering on top of it.
+
+* Every browser has its own "WebDriver driver", e.g. ChromeDriver spawn `Chrome.exe`, EdgeDriver spawn Edge
+  * Edge driver don't forget your cookies and local storage
+* Select element by CSS or XPath
+* Feels like an accessibility library
+
+### PhantomJS
+
+(Type: both WebDriver and browser scripting)
+
+The popular headless browser based on outdated Chrome on Qt.
+Browser automation can be done by injecting JavaScript or WebDriver.
+
+* Native WebDriver support, called GhostDriver
+* Two JavaScript VMs, one for scripting the browser, another is the actual browser
+* No ES6 support
+* Based on Qt
+  * Upside: real headless, including virtual mouse
+  * Downside: font and graphics rendering very differently than our usual Chrome
+
+### CasperJS
+
+(Type: browser scripting)
+
+Run PhantomJS with Node.js. You could do the same thing with [phantomjs](https://npmjs.com/package/phantomjs) package.
+
+* Browser automation is done thru PhantomJS scripting, not WebDriver
+
+### Karma
+
+(Type: injected JavaScript)
+
+In addition to test runner, Karma is also a library for browser automation. It injects JavaScript code after page load. Because test code lives in the browser JavaScript VM, they are kind of limited on interactions.
+
+### NightmareJS
+
+(Type: browser scripting)
+
+Use Electron instead of PhantomJS, so you got up-to-date Chrome with ES6 support.
+
+* No WebDriver support
+* No `mousemove` event
+* Use [Niffy](https://github.com/segmentio/niffy) for visual regression test, a.k.a. [perpetual diffing](https://segment.com/blog/perceptual-diffing-with-niffy/)
+* Commands are queued and return only *single* result, i.e. no if-then statement
+
+### WebDriver.IO
+
+(Type: WebDriver)
+
+JavaScript wrapper library around the bare WebDriver protocol.
+
+* Commands are queued
 
 # Code coverage
 
-There are multiple code coverage tools and Istanbul is the one that support Cobertura format, which can be reported in Visual Studio Online builds.
+There are multiple code coverage tools and [Istanbul](https://istanbul.js.org/) is the one that support Cobertura format, which can be reported in Visual Studio Online builds.
 
 ## Istanbul
 
-Outputs code coverage in multiple formats including HTML, lcov, and Cobertura. Cobertura format is supported by Visual Studio Online build management tool.
+[https://istanbul.js.org/](https://istanbul.js.org/)
+
+Outputs code coverage in multiple formats including HTML, LCOV, and Cobertura. Cobertura format is supported by Visual Studio Online build management tool.
