@@ -24,7 +24,7 @@ In additional, there are more tools to support a test:
 
 All test frameworks listed support asynchronous tests, including asynchronous `beforeEach`/`afterEach` and `it`/`test`.
 
-There are multiple way to do asynchronous in JavaScript, we prefer ES6 `async`-`await` pattern for clarity. For unsupported environment, we can always Babel it.
+There are multiple ways to run JavaScript asynchronously, we prefer ES6 `async`/`await` pattern for clarity. For unsupported environment, we can always Babel it.
 
 ## Mocha
 
@@ -34,11 +34,11 @@ There are multiple way to do asynchronous in JavaScript, we prefer ES6 `async`-`
 
 ### Pluses
 
-* Traditional `describe('apple').it('should be red')` coding style.
-* Support Visual Studio Online build reports by using [JUnit reporter](https://www.npmjs.com/package/mocha-junit-reporter).
-* Visual Studio Test Explorer integration thru [Node.js Tools for Visual Studio](https://github.com/Microsoft/nodejstools#readme) and a `*.njsproj` file.
-* Support asynchronous tests thru `done()` callback or `Promise` (`async`-`await`).
-* CLI is limited, only run all tests or `grep`-ed tests, forcing you to run multiple tests everytime.
+* Traditional `describe('apple').it('should be red')` coding style
+* Support Visual Studio Online build reports by using [JUnit reporter](https://www.npmjs.com/package/mocha-junit-reporter)
+* Visual Studio Test Explorer integration thru [Node.js Tools for Visual Studio](https://github.com/Microsoft/nodejstools#readme) and a `*.njsproj` file
+* Support asynchronous tests thru `done()` callback or `Promise` (`async`/`await`)
+* CLI is limited, only run all tests or `grep`-ed tests, forcing you to run multiple tests everytime
 
 ### Sample code
 
@@ -71,7 +71,7 @@ describe('apple after 6 months', () => {
     assert(apple.color, 'red', 'apple should turns red after 6 months');
   });
 
-  it('should taste good', () => {
+  it('should tastes good', () => {
     assert(apple.taste, 'good', 'apple should taste good');
   });
 });
@@ -123,7 +123,7 @@ describe('apple', () => {
 
 * Traditional `describe('apple').it('should be red')` style code
 * Verify expectation by `expect(1).toBeTruthy()`. An extensible number of matchers like `toBeTruthy()`, `toBe(1)`, `toThrow()`, etc
-* Angular2 has integrated Jasmine
+* Angular2 works well with Jasmine
 * Karma can be used to run tests across multiple browsers
 
 ### Sample code
@@ -153,8 +153,11 @@ Almost like `describe().it('should')`, it is `describe().test('something')`. Sco
 ### Pluses
 
 * Can be easily code-converted from Mocha `describe().it('should')` style
+* Excellent tooling
+  * CLI with watching and incremental testing supported
+  * On-the-fly Visual Studio Code [extension](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest)
 * Tests React by pairing server-side rendering (into strings) and snapshot testing
-* Although Jest is based on Jasmine, it is moving away from Jasmine
+* Although Jest is based on Jasmine, it planned to move away from it
 
 ### WTF? No browser testing?
 
@@ -253,7 +256,7 @@ In short, most test frameworks comes with test runner. An extra runner could hel
 
 ## Karma
 
-Karma primarily help you to ship your test code to a managed browser. It is in two parts:
+Karma primarily help you to ship your test code to multiple managed browsers. It is in two parts:
 
 * Watcher + server: watch `*.js`, send test code to browser, and get results
 * Web page: receive test code, run it, and send results back
