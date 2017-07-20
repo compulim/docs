@@ -121,7 +121,7 @@ describe('apple', () => {
 ### Points to note
 
 * Traditional `describe('apple').it('should be red')` style code
-* Verify expectation by `expect(1).toBeTruthy()`. An extensible number of matchers like `toBeTruthy()`, `toBe(1)`, `toThrow()`, etc
+* Verify expectation by `expect(1).toBeTruthy()`. An extensible list of matchers like `toBeTruthy()`, `toBe(1)`, `toThrow()`, etc
 * Angular2 works well with Jasmine
 * Karma can be used to run tests across multiple browsers
 
