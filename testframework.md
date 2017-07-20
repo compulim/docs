@@ -1,10 +1,13 @@
 # Test packages
 
-There are multiple JavaScript test packages. Test is a very broad terms and we are dividing them into multiple groups:
+There are multiple JavaScript test packages. Test package include  very broad stuff and we are dividing them into multiple groups:
 
 * Test framework - how to group all tests
+  * Think about: coding style, file hierarchy, etc
 * Test runner - how to run the test
+  * Think about: test host, process management, rerun test, watcher, etc
 * Assertion library - how to test
+  * Think about: assertion, setting up expectations, etc
 
 | | Test framework | Test runner | Assertion library |
 | - | - | - | - |
@@ -14,7 +17,7 @@ There are multiple JavaScript test packages. Test is a very broad terms and we a
 | Jest | It is | It is | It is |
 | Karma | It is NOT | It is | It is NOT |
 
-In additional, there are more tools to support a test:
+In addition, there are more tools to support a test:
 
 * Browser automation
 * Code coverage
@@ -163,7 +166,7 @@ Almost like `describe().it('should')`, it is `describe().test('something')`. Sco
 
 Jest is designed to pair up with React. And React is designed to made up of pure JavaScript code (i.e. no DOM access). Thus, your test code should also be pure JavaScript.
 
-Although Jest doesn't run on browser directly, it doesn't need to. Running a pure JavaScript test on a browser is like testing a JavaScript VM instead of your code, it should works 98% of the time. We want to test how our app behave on a specific browser, including layout and interactions. Tests that run on browser should pair up with a remote control library to test the actual behavior, and a screenshot test for layout.
+Although Jest doesn't run on browser directly, it doesn't need to. Running a pure JavaScript test on a browser is like testing a JavaScript VM instead of your code, it should works 98% of the time. We want to test how our app behave on a specific browser, including layout and interactions. Tests that run on browser should pair up with a browser automation library to test the actual behavior, and a screenshot test for layout.
 
 For browser UI testing, you can either:
 
@@ -346,7 +349,7 @@ Run PhantomJS with Node.js. You could do the same thing with [phantomjs](https:/
 
 (Type: injected JavaScript)
 
-In addition to test runner, Karma is also a library for browser automation. It injects JavaScript code after page load. Because test code lives in the browser JavaScript VM, they are kind of limited on interactions.
+In addition to test runner, Karma is also a library for browser automation. It injects JavaScript code after page load. Because test code lives in the browser JavaScript VM, they are very limited on interactions.
 
 ### NightmareJS
 
