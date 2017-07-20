@@ -29,7 +29,7 @@ All test frameworks listed support asynchronous tests, including asynchronous `b
 
 There are multiple ways to run JavaScript asynchronously, we prefer ES6 `async`/`await` pattern for clarity. For unsupported environment, we can always Babel it.
 
-## Mocha <small>[http://mochajs.org/](http://mochajs.org/)</small>
+## [Mocha](http://mochajs.org/)
 
 "The test framework everyone knows."
 
@@ -114,7 +114,7 @@ describe('apple', () => {
 | Browser | Add `<script src="https://unpkg.org/files/mocha/mocha.js" type="text/javascript" />` |
 | Karma | With [`karma-mocha`](https://github.com/karma-runner/karma-mocha) |
 
-## Jasmine <small>[https://jasmine.github.io/](https://jasmine.github.io/)</small>
+## [Jasmine](https://jasmine.github.io/)
 
 "The everything."
 
@@ -141,7 +141,7 @@ expect(apple.color).toBe('red');
 | PhantomJS | [`gulp-jasmine-browser`](https://npmjs.com/package/gulp-jasmine-browser) + [`phantomjs`](https://www.npmjs.com/package/phantomjs) |
 | Karma | [`karma-jasmine`](https://github.com/karma-runner/karma-jasmine) |
 
-## Jest <small>[https://facebook.github.io/jest/](https://facebook.github.io/jest/)</small>
+## [Jest](https://facebook.github.io/jest/)
 
 "Write less, test more."
 
@@ -227,7 +227,7 @@ test('apple should be expected after 6 months', async () => {
 
 # Assertion library
 
-## Chai <small>[http://chaijs.org/](http://chaijs.org/)</small>
+## [Chai](http://chaijs.org/)
 
 Chai is a library to replace traditional `assert(actual, expected)` code. It can pairs up with any test frameworks. Do remind that Chai `should` coding style do global pollution, `expect()` is recommended.
 
@@ -249,7 +249,7 @@ expect(apple).to.have.property('color').equal('red');
 
 In short, most test frameworks comes with test runner. An extra runner could help run the tests in different environments or enhance the tooling.
 
-## Karma
+## [Karma](https://karma-runner.github.io/)
 
 Karma primarily help you to ship your test code to multiple managed browsers. It is in two parts:
 
@@ -304,7 +304,7 @@ The following table list technologies and the way to control the browser:
 
 ## Engine/library/framework
 
-### Selenium/W3C WebDriver protocol <small>[http://www.w3.org/TR/webdriver/](http://www.w3.org/TR/webdriver/)</small>
+### [Selenium/W3C WebDriver protocol](http://www.w3.org/TR/webdriver/)
 
 (Type: WebDriver)
 
@@ -315,7 +315,7 @@ Very comprehensive RESTful API for browser automation. The core protocol and eve
 * Select element by CSS or XPath
 * Feels like an accessibility library
 
-### PhantomJS <small>[http://phantomjs.org/](http://phantomjs.org/)</small>
+### [PhantomJS](http://phantomjs.org/)
 
 (Type: both WebDriver and browser scripting)
 
@@ -329,7 +329,7 @@ Browser automation can be done by injecting JavaScript or WebDriver.
   * Upside: real headless, including virtual mouse
   * Downside: font and graphics rendering very differently than our usual Chrome
 
-### CasperJS <small>[http://casperjs.org/](http://casperjs.org/)</small>
+### [CasperJS](http://casperjs.org/)
 
 (Type: browser scripting)
 
@@ -337,13 +337,13 @@ Run PhantomJS with Node.js. You could do the same thing with [phantomjs](https:/
 
 * Browser automation is done thru PhantomJS scripting, not WebDriver
 
-### Karma <small>[http://karma-runner.github.io/1.0/index.html](http://karma-runner.github.io/1.0/index.html)</small>
+### [Karma](https://karma-runner.github.io/)
 
 (Type: injected JavaScript)
 
 In addition to test runner, Karma is also a library for browser automation. It injects JavaScript code after page load. Because test code lives in the browser JavaScript VM, they are very limited on interactions.
 
-### NightmareJS <small>[http://www.nightmarejs.org/](http://www.nightmarejs.org/)</small>
+### [NightmareJS](http://www.nightmarejs.org/)
 
 (Type: browser scripting)
 
@@ -354,7 +354,7 @@ Use Electron instead of PhantomJS, so you got up-to-date Chrome with ES6 support
 * Use [Niffy](https://github.com/segmentio/niffy) for visual regression test, a.k.a. [perpetual diffing](https://segment.com/blog/perceptual-diffing-with-niffy/)
 * Commands are queued and return only *single* result, i.e. no if-then statement
 
-### WebDriver.IO <small>[http://webdriver.io/](http://webdriver.io/)</small>
+### [WebDriver.IO](http://webdriver.io/)
 
 (Type: WebDriver)
 
@@ -366,6 +366,6 @@ JavaScript wrapper library around the bare WebDriver protocol.
 
 There are multiple code coverage tools and [Istanbul](https://istanbul.js.org/) is the one that support Cobertura format, which can be reported in Visual Studio Online builds.
 
-## Istanbul <small>[https://istanbul.js.org/](https://istanbul.js.org/)</small>
+## [Istanbul](https://istanbul.js.org/)
 
 Outputs code coverage in multiple formats including HTML, LCOV, and Cobertura. Cobertura format is supported by Visual Studio Online build management tool.
