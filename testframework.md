@@ -144,11 +144,16 @@ Almost like `describe().it('should')`, it is `describe().test('something')`. Sco
 
 Tests React by pairing server-side rendering (into strings) and snapshot testing.
 
-### No browser testing?
+### WTF? No browser testing?
 
 Jest is designed to pair up with React. And React is designed to made up of pure JavaScript code (i.e. no DOM access). Thus, your test code should also be pure JavaScript.
 
 Although Jest doesn't run on browser directly, it doesn't need to. Running a pure JavaScript test on a browser is like testing a JavaScript VM instead of your code, it should works 98% of the time. We want to test how our app behave on a specific browser, including layout and interactions. Tests that run on browser should pair up with a remote control library to test the actual behavior, and a screenshot test for layout.
+
+For browser UI testing, you can either:
+
+* Test React by outputting as server-side rendering, which is essentially a string
+* Control the browser to do some stuff, then dump the Redux store in JSON, or take a screenshot
 
 ### Snapshot testing
 
