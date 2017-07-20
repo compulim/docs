@@ -18,6 +18,7 @@ In additional, there are more tools to support a test:
 
 * Remote browser control
 * Code coverage
+* Reporting (usually included in CI/CD)
 
 # Test frameworks
 
@@ -116,7 +117,7 @@ describe('apple', () => {
 
 [https://jasmine.github.io/](https://jasmine.github.io/)
 
-"The everything test framework."
+"The everything."
 
 ### Pluses
 
