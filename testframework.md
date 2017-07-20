@@ -144,6 +144,8 @@ Almost like `describe().it('should')`, it is `describe().test('something')`. Sco
 
 Tests React by pairing server-side rendering (into strings) and snapshot testing.
 
+Although Jest doesn't run on browser directly, it doesn't need to. Running a pure JavaScript test on a browser is like testing a JavaScript VM instead of your code, it should works 98% of the time. We want to test how our app behave on a specific browser, including layout and interactions. Tests that run on browser should pair up with a remote control library to test the actual behavior, and a screenshot test for layout.
+
 ### Snapshot testing
 
 [https://facebook.github.io/jest/docs/en/snapshot-testing.html](https://facebook.github.io/jest/docs/en/snapshot-testing.html)
